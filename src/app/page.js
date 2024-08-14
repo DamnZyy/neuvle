@@ -19,6 +19,9 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 export default function Page() {
   const [showShadow, setShowShadow] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
@@ -37,6 +40,9 @@ export default function Page() {
       window.removeEventListener('scroll', handleScroll);
       };
   }, []);
+  useEffect(() => {
+    AOS.init({ once: true });
+  }, [])
   const Menubar = () => {
       setShowNavbar(!showNavbar);
       setOpen(!isOpen)
@@ -188,7 +194,7 @@ export default function Page() {
 
             <section className='max-w-full m-auto'>
               <div className='relative w-full h-[550px] bg-primary bg-no-repeat bg-cover bg-center bg-fixed bg-[url("/Backgroud.jpg")]'>
-                <div className='text-[#098ef1] z-30 pt-[6rem] flex flex-col max-w-7xl m-auto text-center'>
+                <div className='text-[#098ef1] z-30 pt-[6rem] flex flex-col max-w-7xl m-auto text-center' data-aos="fade-down">
                   <p className='text-5xl sm:text-6xl base:text-7xl xlarge:text-8xl font-bold relative'>NEUVLE</p>
                   <p className='text-base sm:text-xl font-semibold'>We innovate to make things easier for you.</p>
                 </div>
@@ -198,11 +204,11 @@ export default function Page() {
             <section className='max-w-[1340px] m-auto p-5 pt-16'>
               <div className='relative pt-12 h-[470px] medium:h-[550px] large:h-[670px] m-auto bg-[#f0f4fb] rounded-3xl'>
                 <div className='text-center max-w-[880px] sm:pb-10 px-4 m-auto'>
-                  <p className=' text-3xl sm:text-[45px] font-bold text-[#302f40] pb-4'>Overview</p>
-                  <p className='text-gray-500'>NEUVLE (New Era University Virtual Learning Environment) serves as a learning resource. It encompasses all online settings that serve as course supplements, including virtual classrooms, reading materials, educational websites with independent skill tests, and informational resources.</p>
+                  <p className=' text-3xl sm:text-[45px] font-bold text-[#302f40] pb-4' data-aos="zoom-in-up">Overview</p>
+                  <p className='text-gray-500' data-aos="zoom-in-up">NEUVLE (New Era University Virtual Learning Environment) serves as a learning resource. It encompasses all online settings that serve as course supplements, including virtual classrooms, reading materials, educational websites with independent skill tests, and informational resources.</p>
                 </div>
                 <div className='max-w-[1075px] absolute m-auto inset-x-0 '>
-                  <div className='relative p-2 sm:p-4 large:p-6 linear -bottom-16 rounded-2xl mx-5'>
+                  <div className='relative p-2 sm:p-4 large:p-6 linear -bottom-16 rounded-2xl mx-5' data-aos="zoom-in-up">
                     <Image src="/Overview.jpg" alt='Overview' width={1050} height={1050} className='rounded-xl'></Image>
                   </div>
                 </div>
@@ -211,13 +217,13 @@ export default function Page() {
 
             <section className='max-w-[1340px] m-auto p-5 mt-40 medium:flex'>
               <div className='basis-2/4'>
-                <p className='text-[#302f40] text-[26px] font-bold mb-8'>Face-to-Face</p>
-                <p className='max-w-[400px] text-gray-500'>NEUVLE will also be used as a centralized platform to supplement face-to-face time and facilitate the delivery of course content.</p>
-                <Image src="/NEU.jpg" alt='NEU' width={630} height={100} className='mt-14'></Image>
+                <p className='text-[#302f40] text-[26px] font-bold mb-8' data-aos="zoom-in-up">Face-to-Face</p>
+                <p className='max-w-[400px] text-gray-500' data-aos="zoom-in-up">NEUVLE will also be used as a centralized platform to supplement face-to-face time and facilitate the delivery of course content.</p>
+                <Image src="/NEU.jpg" alt='NEU' width={630} height={100} className='mt-14' data-aos="zoom-in-up"></Image>
               </div>
 
               <div className='basis-1/2 mt-10 medium:mt-0'>
-                <div className='flex gap-4'>
+                <div className='flex gap-4' data-aos="zoom-in-up">
                   <div>
                     <Image src="/Creativity1.png" alt='icon1' width={45} height={45} className='min-w-10'></Image>
                   </div>
@@ -229,7 +235,7 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className='flex gap-4'>
+                <div className='flex gap-4' data-aos="zoom-in-up">
                   <div>
                     <Image src="/Creativity2.png" alt='icon2' width={45} height={45} className='min-w-10'></Image>
                   </div>
@@ -241,7 +247,7 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className='text-gray-500 flex flex-col gap-y-3  pl-5 '>
+                <div className='text-gray-500 flex flex-col gap-y-3  pl-5' data-aos="zoom-in-up">
                   <div className='flex items-center justify-start gap-3'>
                     <FaCheck className='text-black' />
                     <p className='flex'>Log-in using your @neu email</p>
@@ -270,31 +276,33 @@ export default function Page() {
             <section className='max-w-[1340px] m-auto p-5 pt-20 base:flex justify-between'>
               <div className='basis-[40%]'>
                 <div>
-                  <p className='text-xl sm:text-2xl medium:text-3xl font-semibold mb-5'>Virtual Offices</p>
+                  <p className='text-xl sm:text-2xl medium:text-3xl font-semibold mb-5' data-aos="zoom-in-up">Virtual Offices</p>
+                  <div data-aos="zoom-in-up">
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger className="text-primary text-start">College Virtual Offices</AccordionTrigger>
+                        {Colleges.map((College, index) => <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer" key={index}><Link href={College.link}>{College.name}</Link></AccordionContent>)}
+                      </AccordionItem>
+                    </Accordion>
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger className="text-primary text-start">Integrated School</AccordionTrigger>
+                        <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/piv-nxzb-hcq">Integrated School</Link></AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="item-3">
+                        <AccordionTrigger className="text-primary text-start">Department Virtual Offices</AccordionTrigger>
+                        <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/vdy-enbt-xyo">Computer Services Department</Link></AccordionContent>
+                        <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/dzv-pmbk-ivp">Guidance Office</Link></AccordionContent>
+                        <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/mxo-kyxn-yxs">Library Department</Link></AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
                 </div>
-                <Accordion type="single" collapsible>
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger className="text-primary text-start">College Virtual Offices</AccordionTrigger>
-                    {Colleges.map((College, index) => <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer" key={index}><Link href={College.link}>{College.name}</Link></AccordionContent>)}
-                  </AccordionItem>
-                </Accordion>
-                <Accordion type="single" collapsible>
-                  <AccordionItem value="item-2">
-                    <AccordionTrigger className="text-primary text-start">Integrated School</AccordionTrigger>
-                    <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/piv-nxzb-hcq">Integrated School</Link></AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-                <Accordion type="single" collapsible>
-                  <AccordionItem value="item-3">
-                    <AccordionTrigger className="text-primary text-start">Department Virtual Offices</AccordionTrigger>
-                    <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/vdy-enbt-xyo">Computer Services Department</Link></AccordionContent>
-                    <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/dzv-pmbk-ivp">Guidance Office</Link></AccordionContent>
-                    <AccordionContent className="text-gray-500 hover:text-black transition-colors cursor-pointer"><Link href="https://meet.google.com/mxo-kyxn-yxs">Library Department</Link></AccordionContent>
-                  </AccordionItem>
-                </Accordion>
               </div>
 
-              <div className='basis-[55%] pt-16 base:pt-0'>
+              <div className='basis-[55%] pt-16 base:pt-0' data-aos="zoom-in-up">
                 <Image src="/Meet.png" alt='Google Meet' width={1000} height={1000}></Image>
               </div>
 
@@ -302,7 +310,7 @@ export default function Page() {
 
             <section className='max-w-7xl m-auto pt-20'>
               <div className='flex flex-col items-center justify-center text-center'>
-                <Image src="/School.png" alt='school' width={950} height={950} className='hidden base:flex'></Image>
+                <Image src="/School.png" alt='school' width={950} height={950} className='hidden base:flex' data-aos="zoom-in-up"></Image>
                 <p className='pt-20 max-w-[1100px] italic px-7'>&quot;For serving our fellowmen should be the essence od education. To seek the well-being of other is one ofe the loftiest goals of learning... In NEU, your education was reinforced with love of fellowmen, of country, and above all, of God...&quot;</p>
               </div>
             </section>
